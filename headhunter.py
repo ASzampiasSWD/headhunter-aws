@@ -6,6 +6,10 @@ import colorama
 from termcolor import colored
 from pathlib import Path
 from rekognition_objects import RekognitionFace
+import cv2
+import matplotlib.pyplot as plt
+from PIL import Image, ImageDraw, ExifTags, ImageColor
+import io
 
 global intFileIndex
 intFileIndex = 0
@@ -17,6 +21,7 @@ global intSuccessMatches
 intSuccessMatches = 0
 colorama.init()
 client=boto3.client('rekognition')
+maxFaces=3
 
 parser = argparse.ArgumentParser(description='Find face matches from one image.')
 parser.add_argument('target_resource', type=str,
@@ -57,6 +62,34 @@ def compareFaces(sourceFile, targetFile):
     return len(response['FaceMatches']) 
 
 
+def findFacesByCollection(image):
+  photo = openImageFile(os.path.join(imageCompareDir, image))
+  print('AMANDAAAA: ' + image)
+  response=client.search_faces_by_image(CollectionId=args.target_resource,
+                        Image={'Bytes': photo.read()},
+                        FaceMatchThreshold=args.similarity_threshold,
+                        MaxFaces=10)
+  image_face = RekognitionFace({
+    'BoundingBox': response['SearchedFaceBoundingBox'],
+    'Confidence': response['SearchedFaceConfidence']
+  })
+  print(response['SearchedFaceBoundingBox'])
+  exit()
+  collection_faces = [RekognitionFace(face['Face']) for face in response['FaceMatches']]
+  #print("Found {} faces in the collection that match the largest face in {}".format(len(collection_faces), image))
+  #print(response)
+  faceMatches=response['FaceMatches']
+  highestSimilarity = 0;
+  for match in faceMatches:
+    if (match['Similarity'] > highestSimilarity):
+      highestSimilarity = match['Similarity']
+  if highestSimilarity > 0:
+    global intSuccessMatches
+    intSuccessMatches += 1
+    print(colored('Face from Collection {} & {} are of the same person, with similarity: {}'.format(args.target_resource, image, highestSimilarity), 'green'))
+    successFile.write('Face from Collection {} & {} are of the same person, with similarity: {}\n'.format(args.target_resource, image, highestSimilarity))
+    successFile.flush()
+
 def openImageFile(filePath):
   try: 
     return open(filePath, 'rb')
@@ -64,22 +97,58 @@ def openImageFile(filePath):
     exit(colored('Cannot open image file: {}'.format(filePath), 'yellow'))
 
 def detect_labels_local_file(photo):  
-    with open(photo, 'rb') as image:
+    with open(os.path.join(imageCompareDir,photo), 'rb') as image:
         #response = client.detect_labels(Image={'Bytes': image.read()})
-        client.compare_faces()
+        #client.compare_faces()
         response = client.detect_faces(Image={'Bytes': image.read()}, Attributes=['ALL'])
+        print('GATOR18: ' + str(response))
         faces = [RekognitionFace(face) for face in response['FaceDetails']]
-        print("Detected {} faces.".format(len(faces)))
         print(faces[0].face_id)
-        print(faces[0].gender)
-        print(faces[0].quality)
-        print(faces[0].pose)
-        print(faces[0].age_range)        
-    #print('Detected labels in ' + photo)    
-    #for label in response['Labels']:
-    #    print (label['Name'] + ' : ' + str(label['Confidence']))
+        print(faces[0])
+        print("Detected {} faces.".format(len(faces)))
+    img = Image.open(os.path.join(imageCompareDir,photo))
+    draw = ImageDraw.Draw(img)  
+    imgWidth, imgHeight = img.size
+
+    box = faces[0].bounding_box
+    left = imgWidth * box['Left']
+    top = imgHeight * box['Top']
+    width = imgWidth * box['Width']
+    height = imgHeight * box['Height']
+
+    points = (
+            (left,top),
+            (left + width, top),
+            (left + width, top + height),
+            (left , top + height),
+            (left, top)
+
+        )
+    #draw.line(points, fill='#00d400', width=2)
+    #draw.rectangle([left,top, left + width, top + height], outline='#00d400')
+    #img.crop(points)
+    image2 = Image.open(open(os.path.join(imageCompareDir,photo), 'rb'))
+    area = (left, top, left + width, top + height)
+    face = image2.crop(area)
+    face.show()
 
     return 'nothing'
+
+def cropBoundingBox():
+    #{'Width': 0.1308685839176178, 'Height': 0.26206353306770325, 'Left': 0.5228204727172852, 'Top': 0.17819029092788696}
+    width =0.1308685839176178
+    height=0.26206353306770325
+    left=0.5228204727172852
+    top=0.17819029092788696
+    filePath = os.path.join(imageCompareDir,'ElonCowboyHatSunglasses.jpeg')
+    img = Image.open(filePath)
+    print(filePath)
+    cropped = img.crop( ( left, top, left + width, top + height ) ) 
+    cropped.show()
+    #plt.imshow(cropped_image)
+    #cv2.imwrite(img, cropped_image)
+
+
 
 if (args.start_at != None):
   intFileIndex = args.start_at
@@ -88,7 +157,14 @@ arImageFiles = getImageFilesFromDirectory()
 print('Total Images in Processing: {}'.format(len(arImageFiles)))
 
 for imageName in getImageFilesFromDirectory():
-  compareFaces(args.target_resource, imageName)
+  if ('.' in args.target_resource):
+    compareFaces(args.target_resource, imageName)
+    cropBoundingBox()
+  else:
+    detect_labels_local_file(imageName)
+    #cropBoundingBox()
+    #detect_labels_local_file(imageName)
+    #findFacesByCollection(imageName)
 
 print('{} Images Processed'.format(len(arImageFiles)))
 print('{} Total Faces Matched'.format(intSuccessMatches))

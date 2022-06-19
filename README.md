@@ -44,6 +44,8 @@ Description: Find common objects like humans, animals, weapons, cars, and more. 
 <pre>
  ./headhunter.py ./Docs/guywithgun.jpg -dl
 </pre>
+<p><b>Input Below</b></p>
+<img width="50%" height="50%" alt="alt_text" src="Docs/detect-labels.png" />
 
 ## Operating Systems
 This script is supported on Windows, Linux, and MacOS.

@@ -10,7 +10,6 @@ global intFileIndex
 intFileIndex = 0
 imageCompareDir = os.path.join(os.getcwd())
 
-
 parser = argparse.ArgumentParser(description='Create a Face Collection for Amazon AWS.')
 parser.add_argument('collection_name', type=str,
                     help='name the face collection')
@@ -25,10 +24,10 @@ imageCompareDir = args.target_directory
 def createCollection(collection_id):
   try: 
     print('Creating collection: {}'.format(collection_id))
-    response=client.create_collection(CollectionId=collection_id)
+    response = client.create_collection(CollectionId=collection_id)
     print('Collection ARN: ' + response['CollectionArn'])
     print(colored('Collection Created', 'green'))
-  except Exception: # b more detailed
+  except client.exceptions.ResourceAlreadyExistsException as e:
     print(colored('The FaceIndex Collection tornado already exists. Please delete first.', 'red'))
     exit()
 

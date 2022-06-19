@@ -1,7 +1,7 @@
 # headhunter-aws
 Find people in face masks, sunglasses, low quality images, hats, and different hair styles using AWS Rekognition. HeadHunter takes an image (or sets of images) and identifies the same face in other photos. Options include People-To-Face, Person-To-Face, and Face-To-Face.
 
-The program has a Detect-Labels and OCR feature too. Detect-Labels will find common objects (car, person, jacket, animals) and notify you. OCR will take an image and parse text from it. 
+The program has a Detect-Labels and OCR feature too. Detect-Labels will find common objects (car, person, jacket, animals, weapons) and notify you. OCR will take an image and parse text from it. 
 
 ## Steps
 1. Install the python libraries using pip3:
@@ -41,6 +41,14 @@ Description: Add a picture of Elon to the Grimes directory. Run the command agai
 
 ### Example 4: Detect-Labels
 Description: Find common objects like humans, animals, weapons, cars, and more. This feature is very basic and a sample of what detect-labels can do. 
+<pre>
+ ./headhunter.py ./Docs/guywithgun.jpg -dl
+</pre>
+<p><b>Input Below</b></p>
+<img width="50%" height="50%" alt="alt_text" src="Docs/detect-labels.png" />
+
+### Example 5: OCR Detect Text
+Description: Find text within an image
 <pre>
  ./headhunter.py ./Docs/guywithgun.jpg -dl
 </pre>

@@ -1,5 +1,5 @@
 # headhunter-aws
-Find people in face masks, sunglasses, low quality images, hats, and different hair styles using AWS Rekognition. HeadHunter takes an image (or sets of images) and identifies the same face in other photos. Options include People-To-Face, Person-To-Face, and Face-To-Face.
+Find people in face masks, sunglasses, low quality images, hats, and different hair styles using AWS Rekognition. HeadHunter takes an image (or sets of images) and identifies the same face in other photos. Options include Face-To-Face, Person-To-Face, and People-To-Face.
 
 The program has a Detect-Labels and OCR feature too. Detect-Labels will find common objects like cars, drugs, alcohol, weed, injections, pills, guns, knifes, hammers, weapons, etc. OCR will take an image and parse text from it. 
 

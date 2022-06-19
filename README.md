@@ -45,15 +45,21 @@ Description: Find common objects like humans, animals, weapons, cars, and more. 
  ./headhunter.py ./Docs/guywithgun.jpg -dl
 </pre>
 <p><b>Input Below</b></p>
-<img width="50%" height="50%" alt="alt_text" src="Docs/detect-labels.png" />
+<kbd>
+ <img width="49%" height="49%" alt="alt_text" border="1" src="Docs/guywithgun.jpg" />
+  <img width="50%" height="50%" alt="alt_text" border="1" src="Docs/detect-labels.png" />
+</kbd>
 
 ### Example 5: OCR Detect Text
 Description: Find text within an image
 <pre>
- ./headhunter.py ./Docs/guywithgun.jpg -dl
+ ./headhunter.py ./Docs/detect-text-example.jpeg -ocr
 </pre>
 <p><b>Input Below</b></p>
-<img width="50%" height="50%" alt="alt_text" src="Docs/detect-labels.png" />
+<kbd>
+  <img width="49%" height="49%" src="Docs/detect-text-example.jpeg" />
+  <img width="50%" height="50%" alt="alt_text" src="Docs/detect-text.png" />
+</kbd>
 
 ## Operating Systems
 This script is supported on Windows, Linux, and MacOS.

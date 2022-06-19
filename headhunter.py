@@ -5,7 +5,7 @@ import os
 import colorama
 from termcolor import colored
 from pathlib import Path
-#from rekognition_objects import RekognitionFace
+from rekognition_objects import RekognitionFace
 from PIL import Image
 import io
 

@@ -129,7 +129,7 @@ def detectLabels(photo):
     print('Detected labels for: {}'.format(photo)) 
     for label in response['Labels']:
         print ("Label: {}".format(label['Name']))
-        print ("Confidence: ".format(label['Confidence']))
+        print ("Confidence: {}".format(label['Confidence']))
         print ("Instances:")
         for instance in label['Instances']:
             print ("  Bounding box")
@@ -141,7 +141,7 @@ def detectLabels(photo):
             print()  
         for parent in label['Parents']:
             print ("Parents:")
-            print ("   ".format(parent['Name']))
+            print ("   {}".format(parent['Name']))
         print ("----------")
     return len(response['Labels'])
 

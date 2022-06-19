@@ -15,8 +15,7 @@ chmod +x create_collection.py
 chmod +x headhunt.py
 </pre>
 
-3. Make a user using Amazon IAM Access. Obtain a User access_key_id and secret_access_key. Place both in your ~/.aws/credentials file.
-Link: https://azure.microsoft.com/en-us/services/cognitive-services/face/
+3. Make a user using Amazon IAM Access. Obtain a User access_key_id and secret_access_key. Place both in your ~/.aws/credentials file. Install aws-cli and use the command aws configure. Pick a region. I use us-east-2 (Ohio).
 
 ## Examples
 I provided Face, Person, and People Examples using the singer-celebrity Grimes and Spaceman Elon. 

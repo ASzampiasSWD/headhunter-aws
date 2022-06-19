@@ -33,9 +33,9 @@ Description: Create a FaceIndex object using example images of Grimes in the Kno
 </pre>
 
 ### Example 3: People-To-Face
-Description: Add a picture of Elon to the Grimes directory. Run the command again. Now the algorithm will look for Elon and Grimes in photos.
+Description: Same as Person-To-Face. Just add more images in one directory. Elon and Grimes are now in one directory. 
 <pre>
- ./create_collection.py spaceship -t ./Known_People/Grimes
+ ./create_collection.py spaceship -t ./Known_People/ElonAndGrimes
  ./headhunter.py spaceship
 </pre>
 

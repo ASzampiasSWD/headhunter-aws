@@ -39,6 +39,12 @@ Description: Add a picture of Elon to the Grimes directory. Run the command agai
  ./headhunter.py spaceship
 </pre>
 
+### Example 4: Detect-Labels
+Description: Find common objects like humans, animals, weapons, cars, and more. This feature is very basic and a sample of what detect-labels can do. 
+<pre>
+ ./headhunter.py ./Docs/guywithgun.jpg -dl
+</pre>
+
 ## Operating Systems
 This script is supported on Windows, Linux, and MacOS.
 

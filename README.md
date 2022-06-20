@@ -1,5 +1,5 @@
 # headhunter-aws
-Find people in face masks, sunglasses, low quality images, hats, and different hair styles using AWS Rekognition. HeadHunter takes an image (or sets of images) and identifies the same face in other photos. Options include People-To-Face, Person-To-Face, and Face-To-Face.
+Find people in face masks, sunglasses, low quality images, hats, and different hair styles using AWS Rekognition. HeadHunter takes an image (or sets of images) and identifies the same face in other photos. Options include Face-To-Face, Person-To-Face, and People-To-Face.
 
 The program has a Detect-Labels and OCR feature too. Detect-Labels will find common objects like cars, drugs, alcohol, weed, injections, pills, guns, knifes, hammers, weapons, etc. OCR will take an image and parse text from it. 
 
@@ -15,8 +15,7 @@ chmod +x create_collection.py
 chmod +x headhunt.py
 </pre>
 
-3. Make a user using Amazon IAM Access. Obtain a User access_key_id and secret_access_key. Place both in your ~/.aws/credentials file.
-Link: https://azure.microsoft.com/en-us/services/cognitive-services/face/
+3. Make a user using Amazon IAM Access. Obtain a User access_key_id and secret_access_key. Place both in your ~/.aws/credentials file. Install aws-cli and use the command aws configure. Pick a region. I use us-east-2 (Ohio).
 
 ## Examples
 I provided Face, Person, and People Examples using the singer-celebrity Grimes and Spaceman Elon. 
@@ -33,9 +32,9 @@ Description: Create a FaceIndex object using example images of Grimes in the Kno
 </pre>
 
 ### Example 3: People-To-Face
-Description: Add a picture of Elon to the Grimes directory. Run the command again. Now the algorithm will look for Elon and Grimes in photos.
+Description: Same as Person-To-Face. Just add more images in one directory. Elon and Grimes are now in one directory. 
 <pre>
- ./create_collection.py spaceship -t ./Known_People/Grimes
+ ./create_collection.py spaceship -t ./Known_People/ElonAndGrimes
  ./headhunter.py spaceship
 </pre>
 

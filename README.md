@@ -78,7 +78,7 @@ Description: Find text within an image
 This script is supported on Windows, Linux, and MacOS.
 
 ## How-To Video
-[![How To Video](https://img.youtube.com/vi/rnMrB7M15pk/0.jpg)](https://www.youtube.com/watch?v=rnMrB7M15pk)
+[![How To Video](https://img.youtube.com/vi/TfbeE0fuaOk/0.jpg)](https://www.youtube.com/watch?v=TfbeE0fuaOk)
 
 
 ## 🚨 🚓 Amazon Policy Towards Police and Law Enforcement: Positive 🚓 🚨

@@ -39,7 +39,7 @@ Description: Same as Person-To-Face. Just add more images in one directory. Elon
 </pre>
 
 ### Example 4: Detect-Labels
-Description: Find common objects like humans, animals, weapons, cars, and more. This feature is very basic and a sample of what detect-labels can do. 
+Description: Find common objects like humans, animals, weapons, drugs, cars, and more. This feature is very basic and a sample of what detect-labels can do. 
 <pre>
  ./headhunter.py ./Docs/detect-labels-example.jpg -dl
  ./headhunter.py ./Docs/detect-labels-example2.png -dl

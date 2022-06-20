@@ -42,11 +42,15 @@ Description: Same as Person-To-Face. Just add more images in one directory. Elon
 Description: Find common objects like humans, animals, weapons, cars, and more. This feature is very basic and a sample of what detect-labels can do. 
 <pre>
  ./headhunter.py ./Docs/detect-labels-example.jpg -dl
+ ./headhunter.py ./Docs/detect-labels-example2.png -dl
 </pre>
 <p><b>Input Below</b></p>
 <kbd>
- <img width="49%" height="49%" alt="alt_text" border="1" src="Docs/detect-labels-example.jpg" />
-  <img width="50%" height="50%" alt="alt_text" border="1" src="Docs/detect-labels.png" />
+ <img width="49%" height="49%" alt="alt_text" src="Docs/detect-labels-example.jpg" />
+  <img width="50%" height="50%" alt="alt_text" src="Docs/detect-labels.png" />
+  <br />
+  <img width="49%" height="49%" alt="alt_text" src="Docs/detect-labels-example2.png" />
+  <img width="50%" height="50%" alt="alt_text" src="Docs/detect-labels2.png" />
 </kbd>
 
 ### Example 5: OCR Detect Text

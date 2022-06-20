@@ -1,7 +1,7 @@
 # headhunter-aws
 Find people in face masks, sunglasses, low quality images, hats, and different hair styles using AWS Rekognition. HeadHunter takes an image (or sets of images) and identifies the same face in other photos. Options include Face-To-Face, Person-To-Face, and People-To-Face.
 
-The program has a Detect-Labels and OCR feature too. Detect-Labels will find common objects like cars, drugs, alcohol, weed, injections, pills, guns, knifes, hammers, weapons, etc. OCR will take an image and parse text from it. 
+This program also has a Detect-Labels and OCR feature. Detect-Labels will find common objects like cars, drugs, alcohol, weed, injections, pills, guns, knifes, hammers, weapons, and more. OCR will take one image and parse text from it. 
 
 ## Steps
 1. Install the python libraries using pip3:
@@ -30,16 +30,23 @@ Description: Create a FaceIndex object using example images of Grimes in the Kno
 </kbd>
 
 ### Example 2: Face-To-Face
+Description: Compare one single image to a directory of images. 
 <pre>
 ./headhunter.py ./Known_People/Grimes/Grimes1.jpg -c ./Images
 </pre>
+<kbd>
+  <img width="80%" height="80%" alt="alt_text" src="Docs/example2.png" />
+</kbd>
 
 ### Example 3: People-To-Face
-Description: Same as Person-To-Face. Just add more images in one directory. Elon and Grimes are now in one directory. 
+Description: Same as Person-To-Face. Just add more images in one directory. Elon and Grimes images are now in one directory. 
 <pre>
  ./create_collection.py spaceship -t ./Known_People/ElonAndGrimes
  ./headhunter.py spaceship
 </pre>
+<kbd>
+  <img width="80%" height="80%" alt="alt_text" src="Docs/example3.png" />
+</kbd>
 
 ### Example 4: Detect-Labels
 Description: Find common objects like humans, animals, weapons, drugs, cars, and more. This feature is very basic and a sample of what detect-labels can do. 
@@ -71,7 +78,7 @@ Description: Find text within an image
 This script is supported on Windows, Linux, and MacOS.
 
 ## How-To Video
-[![How To Video](https://img.youtube.com/vi/rnMrB7M15pk/0.jpg)](https://www.youtube.com/watch?v=rnMrB7M15pk)
+[![How To Video](https://img.youtube.com/vi/TfbeE0fuaOk/0.jpg)](https://www.youtube.com/watch?v=TfbeE0fuaOk)
 
 
 ## 🚨 🚓 Amazon Policy Towards Police and Law Enforcement: Positive 🚓 🚨

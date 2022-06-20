@@ -8,6 +8,7 @@ from pathlib import Path
 from rekognition_objects import RekognitionFace
 from PIL import Image
 import io
+import shutil
 
 global intFileIndex
 intFileIndex = 0
@@ -61,6 +62,7 @@ def compareFaces(sourceFile, targetFile):
         print(colored('Face from {} & {} are of the same person, with similarity: {}'.format(sourceFile, targetFile, similarity), 'green'))
         successFile.write('Face from {} & {} are of the same person, with similarity: {}\n'.format(sourceFile, targetFile, similarity))
         successFile.flush()
+        shutil.copyfile(os.path.join(imageCompareDir, targetFile), os.path.join(dirFoundImages, targetFile))
     if not response['FaceMatches']:
       print(colored('No matching person identified in {}'.format(targetFile), 'red'))  
     return len(response['FaceMatches']) 
@@ -89,6 +91,7 @@ def findFacesByCollection(cropImage, imageName):
       print(colored('Face from Collection {} & {} are of the same person, with similarity: {}'.format(args.target_resource, imageName, highestSimilarity), 'green'))
       successFile.write('Face from Collection {} & {} are of the same person, with similarity: {}\n'.format(args.target_resource, imageName, highestSimilarity))
       successFile.flush()
+      shutil.copyfile(os.path.join(imageCompareDir, imageName), os.path.join(dirFoundImages, imageName))
       global bFindPerson
       bFindPerson = True
   except client.exceptions.InvalidParameterException as e:
@@ -164,29 +167,30 @@ def detectText(photo):
 if (args.start_at != None):
   intFileIndex = args.start_at
 
+if ('.' in args.target_resource and args.detect_text == True):
+  detectText(args.target_resource)
+  print(colored('1 Image Processed', 'green'))
+
+if ('.' in args.target_resource and args.detect_labels == True):
+    detectLabels(args.target_resource)
+    print(colored('1 Image Processed', 'green'))
+
 if (args.detect_labels == False and args.detect_text == False):
   arImageFiles = getImageFilesFromDirectory()
   print('Total Images in Processing: {}'.format(len(arImageFiles)))
 
-for imageName in getImageFilesFromDirectory():
-  if ('.' in args.target_resource and args.detect_labels == False and args.detect_text == False):
-    compareFaces(args.target_resource, imageName)
-  elif ('.' in args.target_resource and args.detect_text == True):
-    detectText(args.target_resource)
-    print(colored('1 Image Processed', 'green'))
-    exit()
-  elif ('.' in args.target_resource and args.detect_labels == True):
-    detectLabels(args.target_resource)
-    print(colored('1 Image Processed', 'green'))
-    exit()
-  else:
-    arCroppedFaces = detectFacesInImage(imageName)
-    bFindPerson = False
-    for croppedFace in arCroppedFaces:
-      findFacesByCollection(croppedFace, imageName)
-    if (bFindPerson == False):
-      print(colored('No matching person identified in {}'.format(imageName), 'red')) 
+  for imageName in getImageFilesFromDirectory():
+    if ('.' in args.target_resource and args.detect_labels == False and args.detect_text == False):
+      compareFaces(args.target_resource, imageName)
+    else:
+      arCroppedFaces = detectFacesInImage(imageName)
+      bFindPerson = False
+      for croppedFace in arCroppedFaces:
+        findFacesByCollection(croppedFace, imageName)
+      if (bFindPerson == False):
+        print(colored('No matching person identified in {}'.format(imageName), 'red')) 
 
-print('{} Images Processed'.format(len(arImageFiles)))
-print('{} Total Faces Matched'.format(intSuccessMatches))
+  print('{} Images Processed'.format(len(arImageFiles)))
+  print('{} Total Faces Matched'.format(intSuccessMatches))
+
 successFile.close()

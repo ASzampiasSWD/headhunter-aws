@@ -28,7 +28,7 @@ def createCollection(collection_id):
     print('Collection ARN: ' + response['CollectionArn'])
     print(colored('Collection Created', 'green'))
   except client.exceptions.ResourceAlreadyExistsException as e:
-    print(colored('The FaceIndex Collection tornado already exists. Please delete first.', 'red'))
+    print(colored('The FaceIndex Collection {} already exists. Please delete first.'.format(collection_id), 'red'))
     exit()
 
 def openImageFile(filePath):

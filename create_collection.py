@@ -2,8 +2,10 @@
 import boto3
 import argparse
 import os
+import colorama
 from termcolor import colored
 
+colorama.init()
 client=boto3.client('rekognition')
 accepted_extensions = ["jpg", "png", "jpeg"]
 global intFileIndex

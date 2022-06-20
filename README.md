@@ -25,10 +25,13 @@ Description: Create a FaceIndex object using example images of Grimes in the Kno
 ./create_collection.py grimes -t ./Known_People/Grimes
 ./headhunter.py grimes
 </pre>
+<kbd>
+  <img width="80%" height="80%" alt="alt_text" src="Docs/example1.png" />
+</kbd>
 
 ### Example 2: Face-To-Face
 <pre>
-./headhunter.py Grimes1.jpg -c ./Images
+./headhunter.py ./Known_People/Grimes/Grimes1.jpg -c ./Images
 </pre>
 
 ### Example 3: People-To-Face

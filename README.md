@@ -30,16 +30,23 @@ Description: Create a FaceIndex object using example images of Grimes in the Kno
 </kbd>
 
 ### Example 2: Face-To-Face
+Description: Compare one single image to a directory of images. 
 <pre>
 ./headhunter.py ./Known_People/Grimes/Grimes1.jpg -c ./Images
 </pre>
+<kbd>
+  <img width="80%" height="80%" alt="alt_text" src="Docs/example2.png" />
+</kbd>
 
 ### Example 3: People-To-Face
-Description: Same as Person-To-Face. Just add more images in one directory. Elon and Grimes are now in one directory. 
+Description: Same as Person-To-Face. Just add more images in one directory. Elon and Grimes images are now in one directory. 
 <pre>
  ./create_collection.py spaceship -t ./Known_People/ElonAndGrimes
  ./headhunter.py spaceship
 </pre>
+<kbd>
+  <img width="80%" height="80%" alt="alt_text" src="Docs/example3.png" />
+</kbd>
 
 ### Example 4: Detect-Labels
 Description: Find common objects like humans, animals, weapons, drugs, cars, and more. This feature is very basic and a sample of what detect-labels can do. 

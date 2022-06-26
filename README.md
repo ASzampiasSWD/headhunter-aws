@@ -63,7 +63,17 @@ Description: Find common objects like humans, animals, weapons, drugs, cars, and
   <img width="50%" height="50%" alt="alt_text" src="Docs/detect-labels2.png" />
 </kbd>
 
-### Example 5: OCR Detect Text
+### Example 5: Detect-Moderation-Labels
+Description: Find if an image falls under a moderation categoy. Categories include Violence, Nudity, Sexually Suggestive, and Visually Disturbing.
+<pre>
+./headhunter.py ./Docs/detect-labels-example.jpg -x
+</pre>
+<kbd>
+  <img width="49%" height="49%" alt="alt_text" src="Docs/detect-labels-example.jpg" />
+  <img width="50%" height="50%" alt="alt_text" src="Docs/example4.png" />
+</kbd>
+
+### Example 6: OCR Detect Text
 Description: Find text within an image
 <pre>
  ./headhunter.py ./Docs/detect-text-example.jpeg -ocr

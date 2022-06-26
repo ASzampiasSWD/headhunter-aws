@@ -22,7 +22,6 @@ global bFindPerson
 bFindPerson = False
 colorama.init()
 client=boto3.client('rekognition')
-maxFaces=3
 
 parser = argparse.ArgumentParser(description='Find face matches from one image or collection.')
 parser.add_argument('target_resource', type=str,
@@ -37,6 +36,8 @@ parser.add_argument('-s', '--start-at', dest='start_at', type=int, default=None,
                     help='Need to start at the middle of a directory? Input the file number here. 5 = 5th Image')
 parser.add_argument('-dl', '--detect-labels', dest='detect_labels', action="store_true",
                     help='Detect Labels in one image')
+parser.add_argument('-x', '-dx', '--detect-mod-labels', dest='detect_mod_labels', action="store_true",
+                    help='Detect Moderation Labels in one image')
 parser.add_argument('-ocr', '--ocr', dest='detect_text', action="store_true",
                     help='Detect Text in one image')
 
@@ -148,6 +149,15 @@ def detectLabels(photo):
         print ("----------")
     return len(response['Labels'])
 
+def detectModerationLabels(photo):
+    img = openImageFile(photo)
+    response = client.detect_moderation_labels(Image={'Bytes': img.read()})
+    print('Detected labels for: {}'.format(photo)) 
+    for label in response['ModerationLabels']:
+        print("Label: {}".format(label['Name']))
+        print("Confidence: {}".format(label['Confidence']))
+    return len(response['ModerationLabels'])
+
 def detectText(photo):
     img = openImageFile(photo)
     response = client.detect_text(Image={'Bytes': img.read()})
@@ -175,12 +185,16 @@ if ('.' in args.target_resource and args.detect_labels == True):
     detectLabels(args.target_resource)
     print(colored('1 Image Processed', 'green'))
 
-if (args.detect_labels == False and args.detect_text == False):
+if ('.' in args.target_resource and args.detect_mod_labels == True):
+    detectModerationLabels(args.target_resource)
+    print(colored('1 Image Processed', 'green'))
+
+if (args.detect_labels == False and args.detect_text == False and args.detect_mod_labels == False):
   arImageFiles = getImageFilesFromDirectory()
   print('Total Images in Processing: {}'.format(len(arImageFiles)))
 
   for imageName in getImageFilesFromDirectory():
-    if ('.' in args.target_resource and args.detect_labels == False and args.detect_text == False):
+    if ('.' in args.target_resource and args.detect_labels == False and args.detect_text == False and args.detect_mod_labels == False):
       compareFaces(args.target_resource, imageName)
     else:
       arCroppedFaces = detectFacesInImage(imageName)
